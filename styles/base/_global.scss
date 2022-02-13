@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+html,body{
+  min-height: 100vh;
+}
+html{
+  scroll-behavior: smooth;
+  font-size: .8rem;
+}
+body {
+  font-family: $primary-font;
+  line-height: 1.5;
+  color: $dark-grey;
+}
+
+a {
+  color: $dark-grey;
+  transition: .2s ease-in-out all;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: #2F80ED;
+  }
+  &:focus {
+    text-decoration: none;
+    outline: none;
+  }
+}
+ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+strong, .font-bold {
+  font-weight: $font-bold;
+}
+
+label{
+  color: $primary-color;
+  // font-size: 10px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 900;
+}
+
+.h-100 {
+  min-height: 100vh;
+}
+.content-wrapper {
+  min-height: calc(100vh - 107px);
+  max-width: 100vw !important;
+  overflow-x: hidden;
+}
+
+.display-font {
+  font-family: 'Mont';
+}
+
+@each $name, $color in $palette {
+  .bg-#{''+$name} {
+    background-color: $color; 
+  }
+  .text-#{''+$name} {
+    color: $color !important;
+  }
+}
+
+.bg-background-login {
+  background-size: cover;
+}
+
+.table-hover>tbody>tr:hover {
+  background: #FDD296;
+}
+
+.text-danger {
+  color: #FD2626 !important;
+}

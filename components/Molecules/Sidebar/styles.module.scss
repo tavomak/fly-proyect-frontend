@@ -1,0 +1,104 @@
+@import "styles/utils/variables";
+@import "styles/utils/mixins";
+@import "styles/utils/media";
+
+// .navigation {
+//   position: relative;
+//   transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
+//   min-height: 100vh;
+//   &Open {
+//     width: 200px;
+//   }
+//   &Close {
+//     width: 90px;
+//   }
+//   &Item{
+//     &Img {
+//       width: 20px;
+//     }
+//     &Text {
+//       opacity: 0;
+//       width: 0;
+//       &Open {
+//         opacity: 1;
+//         width: auto;
+//         transition: all .5s ease-in-out;
+//       }
+//     }
+//   }
+//   &Toggle{
+//     width: 30px;
+//     height: 30px;
+//     color: $white;
+//     background: $emphasis-color;
+//     display: inline-block;
+//     border-radius: 50rem;
+//     position: absolute;
+//     top: 70px;
+//     &Symbol {
+//       @include centerer();
+//       color: $white;
+//     }
+//   }
+// }
+
+.navigation {
+  position: relative;
+  @include MQ(L) {
+    transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
+  }
+  &Open {
+    width: 268px;
+  }
+    &Close {
+      width: 119px;
+    }
+  &Toggle{
+    width: 30px;
+    height: 30px;
+    color: $white;
+    background: $emphasis-color;
+    display: inline-block;
+    border-radius: 50rem;
+    position: absolute;
+    right: -16px;
+    top: 50px;
+    &Symbol {
+      @include centerer();
+      margin-top: -1px;
+      color: $white;
+    }
+  }
+}
+
+.innerMenu {
+  min-width: 190px;
+}
+
+.subList {
+  &Open {
+    display: block;
+    padding-left: 3rem !important;
+    margin-top: 10px;
+  }
+  &Close {
+    position: absolute;
+    background: $white;
+    left: 100px;
+    margin-top: -30px;
+    min-width: 180px;
+    z-index: 2;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
+}
+
+.normalIcon {
+  transition: all .4s ease;
+}
+
+.rotateIcon {
+  transform: rotate(90deg);
+  transition: all .4s ease;
+}

@@ -1,0 +1,35 @@
+@import "../../../styles/utils/variables";
+@import "../../../styles/utils/mixins";
+
+.headerCard {
+  position: absolute;
+  z-index: 4;
+  right: 40px;
+  top: 68px;
+  padding: 0 30px !important;
+  & p {
+    color: $primary-color;
+  }
+  & span {
+    color: $emphasis-color;
+  }
+}
+
+.headerNotify {
+  position: absolute;
+  top: 0;
+  right: -10px;
+  background: #FF7E44;
+  width: 25px;
+  height: 25px;
+  display: block;
+  border-radius: 5rem;
+  text-align: center;
+  &Number  {
+    font-weight: 900;
+    @include centerer();
+  }
+  &Link:hover {
+    color: white;
+  }
+}

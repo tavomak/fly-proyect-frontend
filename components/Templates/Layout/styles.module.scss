@@ -1,0 +1,38 @@
+@import "../../../styles/utils/media";
+
+.gridContainer {
+  min-height: 100vh;
+  @include MQ(L) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "sidenav header"
+      "sidenav main"
+      "sidenav footer";
+    }
+}
+
+.gridSidebarNav {
+  position: relative;
+  transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
+
+  @include MQ(L) {
+    grid-area: sidenav;
+  }
+}
+.gridHeader {
+  @include MQ(L) {
+    grid-area: header;
+  }
+}
+.gridMain {
+  @include MQ(L) {
+    grid-area: main;
+  }
+}
+.gridFooter {
+  @include MQ(L) {
+    grid-area: footer;
+  }
+}

@@ -1,0 +1,20 @@
+.form{
+  label span{
+    color: grey;
+  }
+  &-control {
+    border-radius: 16px;
+    padding: 6px 10px;
+    &:focus {
+      border:  1px solid $grey;
+      box-shadow: none;
+    }
+  }
+}
+.input-error {
+  color: $danger-color !important;
+  text-transform: initial !important;
+  font-size: 14px !important;
+  margin: 0 5px;
+  display: block;
+}
