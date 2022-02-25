@@ -1,4 +1,5 @@
-@import "../../../styles/utils/media";
+@import "styles/utils/media";
+@import "styles/utils/variables";
 
 .gridContainer {
   min-height: 100vh;
@@ -11,11 +12,15 @@
       "sidenav main"
       "sidenav footer";
     }
+    @include MQ(XL) {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 }
 
 .gridSidebarNav {
-  position: relative;
-  transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
+  // position: relative;
+  // transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
 
   @include MQ(L) {
     grid-area: sidenav;

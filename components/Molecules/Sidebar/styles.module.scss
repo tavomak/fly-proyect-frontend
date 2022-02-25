@@ -2,48 +2,13 @@
 @import "styles/utils/mixins";
 @import "styles/utils/media";
 
-// .navigation {
-//   position: relative;
-//   transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
-//   min-height: 100vh;
-//   &Open {
-//     width: 200px;
-//   }
-//   &Close {
-//     width: 90px;
-//   }
-//   &Item{
-//     &Img {
-//       width: 20px;
-//     }
-//     &Text {
-//       opacity: 0;
-//       width: 0;
-//       &Open {
-//         opacity: 1;
-//         width: auto;
-//         transition: all .5s ease-in-out;
-//       }
-//     }
-//   }
-//   &Toggle{
-//     width: 30px;
-//     height: 30px;
-//     color: $white;
-//     background: $emphasis-color;
-//     display: inline-block;
-//     border-radius: 50rem;
-//     position: absolute;
-//     top: 70px;
-//     &Symbol {
-//       @include centerer();
-//       color: $white;
-//     }
-//   }
-// }
-
 .navigation {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+  border-right: 1px solid lighten($grey, 15%);
+  min-height: 100vh;
   @include MQ(L) {
     transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
   }
@@ -78,13 +43,12 @@
 .subList {
   &Open {
     display: block;
-    padding-left: 3rem !important;
-    margin-top: 10px;
+    padding-left: 4.6rem;
   }
   &Close {
     position: absolute;
     background: $white;
-    left: 100px;
+    left: 110px;
     margin-top: -30px;
     min-width: 180px;
     z-index: 2;

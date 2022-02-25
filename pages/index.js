@@ -1,13 +1,13 @@
-import Head from "next/head";
-import React from "react";
-import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-import SignIn from '../components/Atoms/Auth/signin'
+import Head from 'next/head';
+import React from 'react';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+import SignIn from 'components/Atoms/Auth/SigninForm';
 
-export default function Home() {
-  const { data: session, status } = useSession()
+const Home = () => {
+  const { data: session, status } = useSession();
   return (
-    <div >
+    <div>
       <Head>
         <title>Auth Examples</title>
         <link rel="icon" href="/favicon.ico" />
@@ -15,19 +15,26 @@ export default function Home() {
 
       <main>
         {!session && (
-          <SignIn/>
+          <SignIn />
         )}
         {session && (
           <>
-            Signed in as {session.user.email} <br />
+            Signed in as
+            {' '}
+            {session.user.email}
+            {' '}
+            {status}
+            <br />
             <div>You can now access our super secret pages</div>
-            <button>
-              <Link href="/secret">To the secret</Link>
+            <button type="button">
+              <Link href="/test">To the secret</Link>
             </button>
-            <button onClick={signOut}>sign out</button>
+            <button type="button" onClick={signOut}>sign out</button>
           </>
         )}
       </main>
     </div>
   );
-}
+};
+
+export default Home;

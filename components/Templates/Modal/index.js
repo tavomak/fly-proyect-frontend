@@ -1,5 +1,4 @@
 import { CSSTransition } from 'react-transition-group';
-import closeX from 'assets/brand/closeX.svg';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 
@@ -23,7 +22,7 @@ const Modal = ({
           </div>
           <a href="!#" data-testid="printed-username" className={`p-0 ${styles.close}`} onClick={onClick}>
             <span aria-hidden="true" className="p-0">
-              <img src={closeX} alt="Cuenta" width="16" />
+              x
             </span>
           </a>
         </div>

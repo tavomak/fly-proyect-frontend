@@ -23,7 +23,7 @@ function getExportFileBlob({
   }
   return false;
 }
-function MainTable({
+const MainTable = ({
   columns,
   data,
   handleClick,
@@ -32,7 +32,7 @@ function MainTable({
   hadleClickDropDown,
   update,
   noFilters,
-}) {
+}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -170,7 +170,7 @@ function MainTable({
       )}
     </>
   );
-}
+};
 
 MainTable.defaultProps = {
   handleClick: () => {},

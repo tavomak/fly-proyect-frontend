@@ -7,7 +7,7 @@ import Footer from 'components/Molecules/Footer';
 import styles from './styles.module.scss';
 
 const Layout = ({ children }) => {
-  const [activeNavbar, setActiveNavbar] = useState(false);
+  const [activeNavbar, setActiveNavbar] = useState(true);
   return (
     <div className={`${styles.gridContainer} bg-ligth-blue`}>
       <Sidebar

@@ -1,18 +1,28 @@
 import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {
+  FcOrganization, FcTimeline, FcFlowChart, FcHome,
+} from 'react-icons/fc';
+import { FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
+import LogOutButton from 'components/Atoms/Auth/LogoutButton';
+
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 
 const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
-  const primaryLinks = [
+  const Links = [
     {
-      name: 'Dashboard',
+      name: 'Home',
       active: true,
       route: '/',
+      img: <FcHome />,
     },
     {
-      name: 'Órdenes',
+      name: 'Cuentas',
       active: true,
       route: '/ordenes',
+      img: <FcOrganization />,
       childrenActive: false,
       children: [
         {
@@ -26,9 +36,10 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
       ],
     },
     {
-      name: 'Inventario',
+      name: 'Proyectos',
       active: true,
       route: '/inventario',
+      img: <FcFlowChart />,
       childrenActive: false,
       children: [
         {
@@ -42,16 +53,18 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
       ],
     },
     {
-      name: 'Incidencias',
+      name: 'Tareas',
       active: true,
       route: '/incidencias',
+      img: <FcTimeline />,
     },
   ];
 
-  const [currentLinks, setCurrentLinks] = useState(primaryLinks);
+  const [currentLinks, setCurrentLinks] = useState(Links);
 
   const handleClick = (e) => {
     e.preventDefault();
+    setCurrentLinks(Links);
     setActiveNavbar(!activeNavbar);
   };
 
@@ -68,119 +81,123 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
       history.push(newArray[key].route);
     }
   };
+
   const handleHoverItem = (e, key) => {
-    e.preventDefault();
     if (!activeNavbar) {
-      setCurrentLinks(links);
-      const newArray = links;
+      const newArray = currentLinks;
       newArray[key] = {
         ...newArray[key],
-        childrenActive: !newArray[key].childrenActive,
+        childrenActive: true,
       };
       setCurrentLinks([...newArray]);
     }
   };
+
   const handleLeaveItem = () => {
     if (!activeNavbar) {
-      setCurrentLinks(primaryLinks);
+      setCurrentLinks(Links);
+      console.log('leave');
     }
   };
+
   return (
-    <aside className={`${className} shadow bg-white  d-none d-lg-block`}>
-      <nav
-        className={`${styles.navigation} ${activeNavbar ? styles.navigationOpen : styles.navigationClose}`}
-        onMouseLeave={() => handleLeaveItem()}
-      >
-        <a href="!#" onClick={handleClick} className={`${styles.navigationToggle}`}>
+    <aside className={`${className}`}>
+      <nav className={`${styles.navigation} ${activeNavbar ? styles.navigationOpen : styles.navigationClose}`}>
+
+        <a href="!#" onClick={handleClick} className={`${styles.navigationToggle} `}>
           <span className={styles.navigationToggleSymbol}>
             {activeNavbar ? (
-              // <BxChevronLeft
-              //   color="white"
-              //   size="14"
-              // />
-              <p>Left</p>
+              <FiChevronLeft />
             ) : (
-              // <BxChevronRight
-              //   color="white"
-              //   size="14"
-              // />
-              <p>Right</p>
+              <FiChevronRight />
             )}
           </span>
         </a>
-        <div>
-          <div className="text-center my-4 pb-4 d-none d-lg-block">
-            {/* <Link to="/">
-              <img src={LogoBlue} alt="Blue express" width="62" />
-            </Link> */}
-          </div>
-          <ul className="d-flex flex-column align-items-center my-4">
-            <li>
-              <ul className={`${activeNavbar ? styles.innerMenu : ''} whole`}>
-                {currentLinks.map((item, key) => (
-                  <li
-                    className={`${item.active ? '' : 'd-none'} py-2 my-3`}
-                    key={item.name}
-                  >
-                    <a
-                      href="!#"
-                      className="itemLi"
-                      onClick={(e) => handleClickItem(e, key)}
-                      onMouseEnter={(e) => handleHoverItem(e, key)}
-                    >
-                      <div className={`d-flex ${activeNavbar ? 'w-100' : ''}`}>
-                        <div className={`${styles.navigationItemImg} me-2`}>
-                          {/* <img src={item.img} alt={item.name} width="22" /> */}
-                        </div>
-                        <div className={`${styles.navigationItemText} ${activeNavbar ? '' : 'd-none'}`}>
-                          <p className="ms-3 mt-1 mb-0 display-font" style={{ fontSize: 15 }}>
-                            <b>
-                              {item.children?.length > 0 ? (
-                                <span>
-                                  {item.name}
-                                </span>
-                              ) : (
-                                <p>Link</p>
-                              )}
-                            </b>
-                          </p>
-                        </div>
-                        {activeNavbar && item.children?.length > 0 && (
-                          <div className={`ms-auto ${item.childrenActive ? styles.rotateIcon : styles.normalIcon}`}>
-                            {/* <BxChevronRight
-                              color="#ff7e44"
-                              size="16"
-                            /> */}
-                            <p>Right</p>
-                          </div>
-                        )}
-                      </div>
-                    </a>
-                    {item.children?.length > 0 && item.childrenActive && (
-                      <ul className={`mb-2 ${activeNavbar ? styles.subListOpen : styles.subListClose}`}>
-                        {item.children.map((subItem) => (
-                          <li className="py-2" key={subItem.route}>
-                            {/* <Link to={`${subItem.route}`}>
-                              {subItem.name}
-                            </Link> */}
-                            link
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          </ul>
+
+        <div className="text-center my-4 pb-4">
+          <Link href="/">
+            <a href="!#">
+              <Image
+                src="/logoWeb.svg"
+                alt="FlyProject"
+                width="90"
+                height="90"
+              />
+            </a>
+          </Link>
         </div>
+
+        <ul className={`${activeNavbar ? styles.innerMenu : ''}`}>
+          {currentLinks.map((item, key) => (
+            <li
+              className="my-5"
+              key={item.name}
+            >
+              <a
+                href="!#"
+                onClick={(e) => handleClickItem(e, key)}
+                onMouseEnter={(e) => handleHoverItem(e, key)}
+                onMouseLeave={(e) => handleLeaveItem(e)}
+              >
+                <ul className={`d-flex align-items-baseline px-2 ${!activeNavbar ? 'justify-content-center' : ''}`}>
+
+                  <li className="fs-1">
+                    {item.img}
+                  </li>
+
+                  {activeNavbar && (
+                    <li className="ms-4">
+                      <p className="mb-0 fs-4">
+                        <span>{item.name}</span>
+                      </p>
+                    </li>
+                  )}
+
+                  {activeNavbar && item.children?.length > 0 && (
+                    <li className={`${item.childrenActive ? styles.rotateIcon : styles.normalIcon} ms-auto`}>
+                      <FiChevronDown />
+                    </li>
+                  )}
+
+                </ul>
+              </a>
+
+              {item.children?.length > 0 && item.childrenActive && (
+                <ul
+                  className={`${activeNavbar ? styles.subListOpen : styles.subListClose}`}
+                >
+                  {item.children.map((subItem) => (
+                    <li className="py-2" key={subItem.route}>
+                      <Link href={`${subItem.route}`}>
+                        {subItem.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-auto">
+          <LogOutButton activeNavbar={activeNavbar} />
+        </div>
+
       </nav>
     </aside>
   );
 };
 
+Sidebar.defaultProps = {
+  className: '',
+  setActiveNavbar: () => {},
+};
+
 Sidebar.propTypes = {
   activeNavbar: PropTypes.bool.isRequired,
+  className: PropTypes.string,
+  setActiveNavbar: PropTypes.func,
 };
 
 export default Sidebar;

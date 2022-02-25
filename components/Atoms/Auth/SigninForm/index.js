@@ -1,38 +1,36 @@
 import { useState } from 'react';
-import { getCsrfToken, signIn } from "next-auth/react"
-import Image from 'next/image'
-import { useForm } from "react-hook-form";
+import { getCsrfToken, signIn } from 'next-auth/react';
+import Image from 'next/image';
+import { useForm } from 'react-hook-form';
 import useNotify from 'hooks/useNotify';
 import Button from 'components/Atoms/Button';
 
-export default function SignIn() {
+const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data) => {
-    const {email, password} = data;
+    const { email, password } = data;
     setLoading(true);
     signIn('credentials', { redirect: false, email, password })
-    .then(response => {
-      console.log(response.status)
-      if (response.status === 401) {
-        setLoading(false);
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useNotify('error', '¡Mensaje no enviado, por favor intentalo de nuevo!');
-      }
-    });
+      .then((response) => {
+        if (response.status === 401) {
+          setLoading(false);
+          useNotify('error', '¡Mensaje no enviado, por favor intentalo de nuevo!');
+        }
+      });
   };
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <div className="text-center">
         <Image src="/logoWeb.svg" alt="Estela estudio digital" width={120} height={120} />
       </div>
-      <div className='form-group '>
+      <div className="form-group ">
         <label htmlFor="username" className="form-label w-100">
-          <span className='d-block'>
+          <span className="d-block">
             Correo
           </span>
           <input
-            className='form-control'
+            className="form-control"
             id="username"
             name="username"
             type="text"
@@ -46,13 +44,13 @@ export default function SignIn() {
           )}
         </label>
       </div>
-      <div className='form-group '>
+      <div className="form-group ">
         <label htmlFor="password" className="form-label w-100">
-          <span className='d-block'>
+          <span className="d-block">
             Password
           </span>
           <input
-            className='form-control'
+            className="form-control"
             id="password"
             name="password"
             type="password"
@@ -75,14 +73,15 @@ export default function SignIn() {
         />
       </div>
     </form>
-  )
-}
+  );
+};
 
-// This is the recommended way for Next.js 9.3 or newer
 export async function getServerSideProps(context) {
   return {
     props: {
       csrfToken: await getCsrfToken(context),
     },
-  }
+  };
 }
+
+export default SignIn;
