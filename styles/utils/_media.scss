@@ -1,9 +1,10 @@
 // breakpoints
 $breakpoints: (
-  S: 480px,
+  S: 576px,
   M: 768px,
-  L: 1024px,
-  XL: 1400px
+  L: 992px,
+  XL: 1200px,
+  XXL: 1400px,
 );
 
 @mixin MQ($breakpoint){

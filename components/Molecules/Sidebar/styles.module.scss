@@ -5,50 +5,91 @@
 .navigation {
   position: relative;
   display: flex;
-  flex-direction: column;
-  padding: 0 12px;
-  border-right: 1px solid lighten($grey, 15%);
-  min-height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid lighten($grey, 15%);
   @include MQ(L) {
+    flex-direction: column;
+    padding: 0 12px;
+    border-right: 1px solid lighten($grey, 15%);
+    border-bottom: none;
+    min-height: 100vh;
     transition: all .5s cubic-bezier(0.2,0,0,1) 0s;
   }
-  &Open {
-    width: 268px;
+  &List {
+    display: flex;
+    @include MQ(L) {
+      display: block;
+    }
   }
-    &Close {
+  &ListItem {
+    @include MQ(L) {
+      display: flex;
+      align-items: baseline;
+    }
+  }
+  &Open {
+    @include MQ(L) {
+      width: 268px;
+    }
+  }
+  &Close {
+    @include MQ(L) {
       width: 119px;
     }
+  }
   &Toggle{
-    width: 30px;
-    height: 30px;
-    color: $white;
-    background: $emphasis-color;
-    display: inline-block;
-    border-radius: 50rem;
-    position: absolute;
-    right: -16px;
-    top: 50px;
-    &Symbol {
-      @include centerer();
-      margin-top: -1px;
+    display: none;
+    @include MQ(L) {
+      width: 30px;
+      height: 30px;
       color: $white;
+      background: $emphasis-color;
+      display: inline-block;
+      border-radius: 50rem;
+      position: absolute;
+      right: -16px;
+      top: 50px;
+      &Symbol {
+        @include centerer();
+        margin-top: -1px;
+        color: $white;
+      }
     }
   }
 }
-
+.logOutButton {
+  @include MQ(L) {
+    width: 100%;
+    margin-top: auto;
+  }
+}
 .innerMenu {
-  min-width: 190px;
+  @include MQ(L) {
+    min-width: 190px;
+  }
 }
 
 .subList {
   &Open {
-    display: block;
-    padding-left: 4.6rem;
+    position: absolute;
+    background: white;
+    border: 1px solid lighten($grey, 15%);
+    padding: 20px;
+    border-radius: 5px;
+    min-width: 180px;
+    @include MQ(L) {
+      position: relative;
+      display: block;
+      border: none;
+      padding: 0;
+      padding-left: 4.6rem;
+    }
   }
   &Close {
     position: absolute;
     background: $white;
-    left: 110px;
+    left: 100px;
     margin-top: -30px;
     min-width: 180px;
     z-index: 2;

@@ -22,8 +22,8 @@ const LogOutButton = ({ activeNavbar }) => {
   return (
     <div className="w-100 position-relative px-2 mb-1">
       <a href="!#" className={`${styles.profileButton}`} onClick={handleClickToggle}>
-        <ul className={`d-flex align-items-center ${activeNavbar ? 'justify-content-between' : 'justify-content-center'}`}>
-          <li>
+        <ul className={`mb-0 mb-lg-4 d-lg-flex align-items-center ${activeNavbar ? 'justify-content-between' : 'justify-content-center'}`}>
+          <li className="px-4 px-lg-0">
             <div
               className={`rounded-circle position-relative ${styles.userImage}`}
             >
@@ -36,14 +36,14 @@ const LogOutButton = ({ activeNavbar }) => {
           </li>
           {activeNavbar && (
             <>
-              <li>
+              <li className="d-none d-lg-block ">
                 <p className="mb-0">
                   {session.user.name}
                   {' '}
                   {session.user.lastName}
                 </p>
               </li>
-              <li>
+              <li className="d-none d-lg-block ">
                 <div
                   className="position-relative p-3"
                 >

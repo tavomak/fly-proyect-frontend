@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -21,42 +22,50 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
     {
       name: 'Cuentas',
       active: true,
-      route: '/ordenes',
       img: <FcOrganization />,
       childrenActive: false,
       children: [
         {
-          name: 'Carga de Órdenes',
-          route: '/ordenes/subir-ordenes',
+          name: 'Listado de Cuentas',
+          route: '/cuentas',
         },
         {
-          name: 'Listado de Órdenes',
-          route: '/ordenes',
+          name: 'Crear cuenta',
+          route: '/cuentas/crear-cuenta',
         },
       ],
     },
     {
       name: 'Proyectos',
       active: true,
-      route: '/inventario',
       img: <FcFlowChart />,
       childrenActive: false,
       children: [
         {
-          name: 'Listado de Inventario',
-          route: '/inventario',
+          name: 'Listado de Proyectos',
+          route: '/proyectos',
         },
         {
-          name: 'Listado de Reposición',
-          route: '/reposition',
+          name: 'Crear Proyecto',
+          route: '/proyectos/crear-proyecto',
         },
       ],
     },
     {
       name: 'Tareas',
       active: true,
-      route: '/incidencias',
       img: <FcTimeline />,
+      childrenActive: false,
+      children: [
+        {
+          name: 'Listado de Tareas',
+          route: '/proyectos',
+        },
+        {
+          name: 'Crear Tarea',
+          route: '/tareas/crear-tarea',
+        },
+      ],
     },
   ];
 
@@ -70,15 +79,13 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
 
   const handleClickItem = (e, key) => {
     e.preventDefault();
-    const newArray = currentLinks;
+    const newArray = Links;
     if (activeNavbar) {
       newArray[key] = {
         ...newArray[key],
         childrenActive: !newArray[key].childrenActive,
       };
       setCurrentLinks([...newArray]);
-    } else {
-      history.push(newArray[key].route);
     }
   };
 
@@ -96,7 +103,6 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
   const handleLeaveItem = () => {
     if (!activeNavbar) {
       setCurrentLinks(Links);
-      console.log('leave');
     }
   };
 
@@ -114,7 +120,7 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
           </span>
         </a>
 
-        <div className="text-center my-4 pb-4">
+        <div className="text-center my-lg-4 pb-lg-4">
           <Link href="/">
             <a href="!#">
               <Image
@@ -127,34 +133,42 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
           </Link>
         </div>
 
-        <ul className={`${activeNavbar ? styles.innerMenu : ''}`}>
+        <ul className={`${styles.navigationList} ${activeNavbar ? styles.innerMenu : ''}`}>
           {currentLinks.map((item, key) => (
             <li
-              className="my-5"
+              className="my-lg-5"
               key={item.name}
+              onMouseLeave={(e) => handleLeaveItem(e)}
             >
               <a
                 href="!#"
                 onClick={(e) => handleClickItem(e, key)}
                 onMouseEnter={(e) => handleHoverItem(e, key)}
-                onMouseLeave={(e) => handleLeaveItem(e)}
               >
-                <ul className={`d-flex align-items-baseline px-2 ${!activeNavbar ? 'justify-content-center' : ''}`}>
+                <ul className={`w-100 ${styles.navigationListItem} px-2 ${!activeNavbar ? 'justify-content-center' : ''}`}>
 
-                  <li className="fs-1">
-                    {item.img}
+                  <li className="fs-1 mx-2 mx-lg-0">
+                    {item.children?.length > 1 ? (
+                      <span>
+                        {item.img}
+                      </span>
+                    ) : (
+                      <Link href={`${item.route}`}>
+                        {item.img}
+                      </Link>
+                    )}
                   </li>
 
                   {activeNavbar && (
-                    <li className="ms-4">
-                      <p className="mb-0 fs-4">
+                    <li className="d-none d-lg-block ms-lg-4">
+                      <p className="mb-0 fs-lg-4">
                         <span>{item.name}</span>
                       </p>
                     </li>
                   )}
 
                   {activeNavbar && item.children?.length > 0 && (
-                    <li className={`${item.childrenActive ? styles.rotateIcon : styles.normalIcon} ms-auto`}>
+                    <li className={`d-none d-lg-block ${item.childrenActive ? styles.rotateIcon : styles.normalIcon} ms-lg-auto`}>
                       <FiChevronDown />
                     </li>
                   )}
@@ -180,7 +194,7 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
           ))}
         </ul>
 
-        <div className="mt-auto">
+        <div className={`${styles.logOutButton}`}>
           <LogOutButton activeNavbar={activeNavbar} />
         </div>
 
