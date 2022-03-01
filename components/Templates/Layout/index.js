@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 const Layout = ({ children }) => {
   const [activeNavbar, setActiveNavbar] = useState(true);
   return (
-    <div className={`${styles.gridContainer} bg-ligth-blue`}>
+    <div className={`${styles.gridContainer}`}>
       <Sidebar
         className={styles.gridSidebarNav}
         activeNavbar={activeNavbar}
@@ -20,12 +20,8 @@ const Layout = ({ children }) => {
         activeNavbar={activeNavbar}
         setActiveNavbar={setActiveNavbar}
       />
-      <main className={`${styles.gridMain} container-fluid content-wrapper px-5`}>
-        <div className="row">
-          <div className="col-12">
-            { children }
-          </div>
-        </div>
+      <main className={`${styles.gridMain} content-wrapper p-5`}>
+        { children }
       </main>
       <Footer
         className={styles.gridFooter}

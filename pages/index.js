@@ -1,19 +1,14 @@
-import Head from 'next/head';
 import React from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import SignIn from 'components/Atoms/Auth/SigninForm';
+import PageLAyout from 'components/Templates/PageLayout';
 
 const Home = () => {
   const { data: session, status } = useSession();
   return (
-    <div>
-      <Head>
-        <title>Auth Examples</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
+    <PageLAyout>
+      <div>
         {!session && (
           <SignIn />
         )}
@@ -32,8 +27,8 @@ const Home = () => {
             <button type="button" onClick={signOut}>sign out</button>
           </>
         )}
-      </main>
-    </div>
+      </div>
+    </PageLAyout>
   );
 };
 

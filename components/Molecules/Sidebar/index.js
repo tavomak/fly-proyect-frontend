@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -7,6 +6,7 @@ import {
 } from 'react-icons/fc';
 import { FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
 import LogOutButton from 'components/Atoms/Auth/LogoutButton';
+import { useRouter } from 'next/router';
 
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
@@ -70,6 +70,7 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
   ];
 
   const [currentLinks, setCurrentLinks] = useState(Links);
+  const router = useRouter();
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -77,9 +78,12 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
     setActiveNavbar(!activeNavbar);
   };
 
-  const handleClickItem = (e, key) => {
+  const handleClickItem = (e, key, itemRoute) => {
     e.preventDefault();
-    const newArray = Links;
+    if (itemRoute) {
+      router.push(itemRoute);
+    }
+    const newArray = currentLinks;
     if (activeNavbar) {
       newArray[key] = {
         ...newArray[key],
@@ -142,27 +146,21 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
             >
               <a
                 href="!#"
-                onClick={(e) => handleClickItem(e, key)}
+                onClick={(e) => handleClickItem(e, key, item.route)}
                 onMouseEnter={(e) => handleHoverItem(e, key)}
               >
                 <ul className={`w-100 ${styles.navigationListItem} px-2 ${!activeNavbar ? 'justify-content-center' : ''}`}>
 
                   <li className="fs-1 mx-2 mx-lg-0">
-                    {item.children?.length > 1 ? (
-                      <span>
-                        {item.img}
-                      </span>
-                    ) : (
-                      <Link href={`${item.route}`}>
-                        {item.img}
-                      </Link>
-                    )}
+                    <span>
+                      {item.img}
+                    </span>
                   </li>
 
                   {activeNavbar && (
                     <li className="d-none d-lg-block ms-lg-4">
-                      <p className="mb-0 fs-lg-4">
-                        <span>{item.name}</span>
+                      <p className="mb-0">
+                        <span className="fs-4">{item.name}</span>
                       </p>
                     </li>
                   )}

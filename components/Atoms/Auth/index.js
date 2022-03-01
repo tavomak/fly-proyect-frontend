@@ -5,6 +5,8 @@ import Spinner from 'components/Atoms/Spinner';
 import LayouUnAuth from 'components/Templates/LayoutUnAuuth';
 import Layout from 'components/Templates/Layout';
 
+import PropTypes from 'prop-types';
+
 const Auth = ({ children }) => {
   const [authorized, setAuthorized] = useState(false);
   const { data: session, status } = useSession();
@@ -18,11 +20,9 @@ const Auth = ({ children }) => {
 
   if (status === 'loading') {
     return (
-      <LayouUnAuth title="Loading...">
-        <div className="text-center">
-          <Spinner />
-        </div>
-      </LayouUnAuth>
+      <div className="mainLoader">
+        <Spinner />
+      </div>
     );
   }
 
@@ -39,6 +39,10 @@ const Auth = ({ children }) => {
       <Signin />
     </LayouUnAuth>
   );
+};
+
+Auth.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Auth;

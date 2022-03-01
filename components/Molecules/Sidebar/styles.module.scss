@@ -66,6 +66,7 @@
 }
 .innerMenu {
   @include MQ(L) {
+    width: 100%;
     min-width: 190px;
   }
 }
@@ -78,12 +79,19 @@
     padding: 20px;
     border-radius: 5px;
     min-width: 180px;
+    @include centerer();
+    top: 130px;
+    width: 80%;
     @include MQ(L) {
       position: relative;
       display: block;
       border: none;
       padding: 0;
       padding-left: 4.6rem;
+      top: 0;
+      left: 0;
+      transform: translate(0%, 0%);
+      width: auto;
     }
   }
   &Close {

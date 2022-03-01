@@ -2,7 +2,6 @@
 @import "styles/utils/variables";
 
 .gridContainer {
-  min-height: 100vh;
   @include MQ(L) {
     display: grid;
     grid-template-columns: auto 1fr;

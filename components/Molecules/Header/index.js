@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 
 const Header = ({ className, activeNavbar, setActiveNavbar }) => {
   return (
-    <header className={`${className}`}>
+    <header className={`${className} px-5`}>
     </header>
   );
 };
 
 Header.defaultProps = {
+  className: '',
   setActiveNavbar: () => { },
 };
 
 Header.propTypes = {
   activeNavbar: PropTypes.bool.isRequired,
+  className: PropTypes.string,
   setActiveNavbar: PropTypes.func,
 };
 
