@@ -1,7 +1,7 @@
 import { SessionProvider } from 'next-auth/react';
 import { ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types';
-import Auth from 'components/Atoms/Auth';
+import Auth from 'components/Auth';
 
 import 'styles/main.scss';
 

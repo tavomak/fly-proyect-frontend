@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import Signin from 'components/Atoms/Auth/SigninForm';
+import Signin from 'components/Auth/SigninForm';
 import Spinner from 'components/Atoms/Spinner';
 import LayouUnAuth from 'components/Templates/LayoutUnAuuth';
 import Layout from 'components/Templates/Layout';

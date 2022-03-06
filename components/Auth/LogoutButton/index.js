@@ -37,7 +37,7 @@ const LogOutButton = ({ activeNavbar }) => {
           {activeNavbar && (
             <>
               <li className="d-none d-lg-block ">
-                <p className="mb-0">
+                <p className="mb-0 fs-5">
                   {session.user.name}
                   {' '}
                   {session.user.lastName}

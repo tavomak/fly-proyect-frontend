@@ -1,5 +1,5 @@
 const Account = () => (
-  <p>Account</p>
+  <p>Listado de cuentas</p>
 );
 
 export default Account;

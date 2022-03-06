@@ -5,7 +5,7 @@ import {
   FcOrganization, FcTimeline, FcFlowChart, FcHome,
 } from 'react-icons/fc';
 import { FiChevronRight, FiChevronLeft, FiChevronDown } from 'react-icons/fi';
-import LogOutButton from 'components/Atoms/Auth/LogoutButton';
+import LogOutButton from 'components/Auth/LogoutButton';
 import { useRouter } from 'next/router';
 
 import PropTypes from 'prop-types';
@@ -124,7 +124,7 @@ const Sidebar = ({ className, activeNavbar, setActiveNavbar }) => {
           </span>
         </a>
 
-        <div className="text-center my-lg-4 pb-lg-4">
+        <div className="align-self-start my-lg-4 pb-lg-4">
           <Link href="/">
             <a href="!#">
               <Image
